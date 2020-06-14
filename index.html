@@ -65,20 +65,6 @@
     */
     function game(oneRound) {
       let counter = 0;
-      for (let i = 0; i < 5; i++) {
-        let choice = prompt('Please enter your RPS choice', 'rock');
-        let result = oneRound(choice, computerPlay());
-        console.log(result);
-        if (result.search("win") != -1) {
-          counter +=1;
-        }
-      }
-      if (counter >= 3) {
-        return "You won " + counter + " out of 5 rounds, congrats!";
-      }
-      else {
-        return "You won " + counter + " out of 5 rounds, better luck next time!"
-      }
     }
     console.log(game(oneRound));
   </script>
