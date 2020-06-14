@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <script>
+    console.log(sumAll(1,4));
+    /*
+    Input: none
+    Output: string
+    simulates rock paper scissors by randomly returning one of the possibilities
+    */
+    function computerPlay() {
+      // generates 0, 1, 2 for 3 choices
+      let randSelec = Math.floor(Math.random() * 3);
+      if (randSelec == 0) {
+        return "Rock";
+      }
+      else if (randSelec == 1) {
+        return "Paper";
+      }
+      else if (randSelec == 2) {
+        return "Scissors";
+      }
+    }
+    //console.log(computerPlay());
+
+    /*
+    Input: two strings
+    Output: string
+    This function simulates the game of rock paper scissors by taking in
+    a user's choice in RPS and a computer's choice
+    */
+    function oneRound(playerSelection, computerSelection) {
+      playerSelection = playerSelection.toLowerCase();
+      computerSelection = computerSelection.toLowerCase();
+      //console.log(playerSelection);
+      //console.log(computerSelection);
+      if (playerSelection == computerSelection) {
+        return "It is a tie, " + playerSelection + " can't beat " + computerSelection;
+      }
+      else if (playerSelection == "rock" && computerSelection == "scissors") {
+        return "You win, " + playerSelection + " beats " + computerSelection;
+      }
+      else if (playerSelection == "rock" && computerSelection == "paper") {
+        return "You lose, " + computerSelection + " beats " + playerSelection;
+      }
+      else if (playerSelection == "paper" && computerSelection == "rock") {
+        return "You win, " + playerSelection + " beats " + computerSelection;
+      }
+      else if (playerSelection == "paper" && computerSelection == "scissors") {
+        return "You lose, " + computerSelection + " beats " + playerSelection;
+      }
+      else if (playerSelection == "scissors" && computerSelection == "paper") {
+        return "You win, " + playerSelection + " beats " + computerSelection;
+      }
+      else if (playerSelection == "scissors" && computerSelection == "rock") {
+        return "You lose, " + computerSelection + " beats " + playerSelection;
+      }
+    }
+    // let choice = prompt('Please enter your RPC choice', "rock");
+    // console.log(oneRound(choice, computerPlay()));
+
+    /*
+    Input: function
+    Output: string
+    This function simulates 5 games of RPS between a user and computer. It keeps
+    a count of the wins and lets you know if you won or not
+    */
+    function game(oneRound) {
+      let counter = 0;
+      for (let i = 0; i < 5; i++) {
+        let choice = prompt('Please enter your RPS choice', 'rock');
+        let result = oneRound(choice, computerPlay());
+        console.log(result);
+        if (result.search("win") != -1) {
+          counter +=1;
+        }
+      }
+      if (counter >= 3) {
+        return "You won " + counter + " out of 5 rounds, congrats!";
+      }
+      else {
+        return "You won " + counter + " out of 5 rounds, better luck next time!"
+      }
+    }
+    console.log(game(oneRound));
+  </script>
+</html>
