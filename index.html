@@ -1,5 +1,37 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <meta charset="UTF-8">
+  <title>Rock Paper Scissors Simulation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+  <main>
+    <!--Title -->
+    <header>
+      <h1>Oscar's Rock Paper Scissors Simulator</h1>
+      <p>This website is made to simulate a game of rock, paper, scissors with
+        a computer</p>
+    </header>
+
+    <!-- body content -->
+    <div id = "container">
+      <h2>Please Select a choice below</h2>
+      <section id = "selections">
+        <div id = "RockSelection">
+          <img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTxAaA9XVu96m06DW9wQQ1Q90zZb-s3fIe0Qc8ZCir-ytQ3YsJ1&usqp=CAU">
+          <button id = "rock">Rock</button>
+        </div>
+        <div id = "PaperSelection">
+          <img src = "https://image.shutterstock.com/image-vector/stack-white-papers-cartoon-vector-260nw-191773736.jpg">
+          <button id = "paper">Paper</button>
+        </div>
+        <div id = "ScissorSelection">
+          <img src = "https://cdn3.vectorstock.com/i/1000x1000/36/57/scissors-cartoon-vector-21843657.jpg">
+          <button id = "scissors">Scissors</button>
+        </div>
+      </section>ß
+    </div>
+  </main>
   <script>
     /*
     Input: none
@@ -27,11 +59,11 @@
     This function simulates the game of rock paper scissors by taking in
     a user's choice in RPS and a computer's choice
     */
-    function oneRound(playerSelection, computerSelection) {
+    function playRound(playerSelection, computerSelection) {
       playerSelection = playerSelection.toLowerCase();
       computerSelection = computerSelection.toLowerCase();
-      //console.log(playerSelection);
-      //console.log(computerSelection);
+      console.log(playerSelection);
+      console.log(computerSelection);
       if (playerSelection == computerSelection) {
         return "It is a tie, " + playerSelection + " can't beat " + computerSelection;
       }
@@ -63,9 +95,23 @@
     This function simulates 5 games of RPS between a user and computer. It keeps
     a count of the wins and lets you know if you won or not
     */
-    function game(oneRound) {
+    function game(playRound) {
       let counter = 0;
     }
-    console.log(game(oneRound));
+
+    function iterateArr(buttons) {
+      for (let i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', assignChoice);
+      }
+    }
+
+    function assignChoice(e) {
+      let choice = this.textContent;
+      console.log(choice);
+      playRound(choice, computerPlay());
+    }
+
+    const buttons = document.querySelectorAll('button');
+    iterateArr(buttons);
   </script>
 </html>
