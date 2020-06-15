@@ -9,11 +9,15 @@
     <!--Title -->
     <header>
       <h1>Oscar's Rock Paper Scissors Simulator</h1>
-      <p>This website is made to simulate a game of rock, paper, scissors with
-        a computer</p>
+      <p>
+        This website is made to simulate a game of rock, paper, scissors with
+        a computer.
+        <br>
+        Best out of 5 display.
+      </p>
     </header>
 
-    <!-- body content -->
+    <!-- selection -->
     <div id = "container">
       <h2>Please Select a choice below</h2>
       <section id = "selections">
@@ -29,8 +33,23 @@
           <img src = "https://cdn3.vectorstock.com/i/1000x1000/36/57/scissors-cartoon-vector-21843657.jpg">
           <button id = "scissors">Scissors</button>
         </div>
-      </section>ß
+      </section>
+
+    <!-- Results Section -->
+      <div id = "Results">
+        <h3>Results</h3>
+      </div>
     </div>
+    <!-- Table cannot use
+    <table>
+      <tr>
+          <th>Round Number</th>
+          <th>Your Choice</th>
+          <th>Computer Choice</th>
+          <th>Win/Lose</th>
+      </tr>
+    </table>
+  -->
   </main>
   <script>
     /*
@@ -60,31 +79,31 @@
     a user's choice in RPS and a computer's choice
     */
     function playRound(playerSelection, computerSelection) {
-      playerSelection = playerSelection.toLowerCase();
-      computerSelection = computerSelection.toLowerCase();
-      console.log(playerSelection);
-      console.log(computerSelection);
-      if (playerSelection == computerSelection) {
-        return "It is a tie, " + playerSelection + " can't beat " + computerSelection;
-      }
-      else if (playerSelection == "rock" && computerSelection == "scissors") {
-        return "You win, " + playerSelection + " beats " + computerSelection;
-      }
-      else if (playerSelection == "rock" && computerSelection == "paper") {
-        return "You lose, " + computerSelection + " beats " + playerSelection;
-      }
-      else if (playerSelection == "paper" && computerSelection == "rock") {
-        return "You win, " + playerSelection + " beats " + computerSelection;
-      }
-      else if (playerSelection == "paper" && computerSelection == "scissors") {
-        return "You lose, " + computerSelection + " beats " + playerSelection;
-      }
-      else if (playerSelection == "scissors" && computerSelection == "paper") {
-        return "You win, " + playerSelection + " beats " + computerSelection;
-      }
-      else if (playerSelection == "scissors" && computerSelection == "rock") {
-        return "You lose, " + computerSelection + " beats " + playerSelection;
-      }
+        playerSelection = playerSelection.toLowerCase();
+        computerSelection = computerSelection.toLowerCase();
+        //console.log(playerSelection);
+        //console.log(computerSelection);
+        if (playerSelection == computerSelection) {
+          return "It is a tie, " + playerSelection + " can't beat " + computerSelection;
+        }
+        else if (playerSelection == "rock" && computerSelection == "scissors") {
+          return "You win, " + playerSelection + " beats " + computerSelection;
+        }
+        else if (playerSelection == "rock" && computerSelection == "paper") {
+          return "You lose, " + computerSelection + " beats " + playerSelection;
+        }
+        else if (playerSelection == "paper" && computerSelection == "rock") {
+          return "You win, " + playerSelection + " beats " + computerSelection;
+        }
+        else if (playerSelection == "paper" && computerSelection == "scissors") {
+          return "You lose, " + computerSelection + " beats " + playerSelection;
+        }
+        else if (playerSelection == "scissors" && computerSelection == "paper") {
+          return "You win, " + playerSelection + " beats " + computerSelection;
+        }
+        else if (playerSelection == "scissors" && computerSelection == "rock") {
+          return "You lose, " + computerSelection + " beats " + playerSelection;
+        }
     }
     // let choice = prompt('Please enter your RPC choice', "rock");
     // console.log(oneRound(choice, computerPlay()));
@@ -107,11 +126,51 @@
 
     function assignChoice(e) {
       let choice = this.textContent;
-      console.log(choice);
-      playRound(choice, computerPlay());
+      game(choice);
     }
 
+    function game(choice) {
+      let result = playRound(choice, computerPlay());
+      //console.log(result);
+      resultText.textContent = result;
+      results.appendChild(resultText);
+      if (result.search("win") != -1) {
+        personCounter += 1;
+        //console.log(personCounter);
+        personScore.textContent = "Your Score: " + personCounter;
+        resultText.appendChild(personScore);
+      }
+      else if (result.search("lose") != -1){
+        compCounter += 1;
+        //console.log(compCounter);
+        compScore.textContent = "Computer Score: " + compCounter;
+        resultText.appendChild(compScore);
+      }
+      if (personCounter == 5) {
+        //console.log("You won 5 rounds, congrats!");
+        winner.textContent = "You won 5 rounds, congrats!";
+      }
+      else if (compCounter == 5){
+        //console.log("The computer won 5 rounds, better luck next time!");
+        winner.textContent = "The computer won 5 rounds, better luck next time!";
+      }
+      if (personCounter == 5 || compCounter == 5) {
+        resultText.appendChild(winner);
+        setTimeout(function () {
+          alert('Please refresh the page and play again!');
+        }, 500);
+      }
+    }
+
+    let personCounter = 0;
+    let compCounter = 0;
     const buttons = document.querySelectorAll('button');
+    const results = document.querySelector('#Results');
+    // const resultHeader = document.querySelector('h3');
+    const resultText = document.createElement('p');
+    const personScore = document.createElement('p');
+    const compScore = document.createElement('p');
+    const winner = document.createElement('p');
     iterateArr(buttons);
   </script>
 </html>
